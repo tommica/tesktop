@@ -1,13 +1,15 @@
 import React, {createContext, useState} from "react";
 import {sortBy} from "lodash";
 
+// TODO: I do not like the name of this file
+
 interface AppItem {
     title: string,
     id: string,
-    initialX: number,
-    initialY: number,
-    content: string,
-    zIndex?: number,
+    initialX?: number, // TODO: Does not make sense to have it here - why should the manager worry where to place them?
+    initialY?: number, // TODO: Does not make sense to have it here - why should the manager worry where to place them?
+    children: React.ReactNode,
+    fill: boolean,
 }
 
 interface AppsContextType {
@@ -33,6 +35,9 @@ export const AppsContextProvider: React.FC<{ children: React.ReactNode }> = ({ch
     const [apps, setApps] = useState<AppItem[]>([]);
 
     const startApp = (newApp: AppItem) => {
+        newApp.initialY = newApp.initialY ? newApp.initialY : 0;
+        newApp.initialX = newApp.initialX ? newApp.initialX : 0;
+
         setApps([...apps, newApp]);
     }
 

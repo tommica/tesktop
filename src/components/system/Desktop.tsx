@@ -14,15 +14,15 @@ const Desktop: React.FC<Props> = (props) => {
             className="w-screen h-screen bg-cover bg-center bg-no-repeat"
             style={{backgroundImage: `url("${bgImage}")`}}
         >
-            {apps.map((app) => (
+            {apps.map(({title, id, initialY, initialX, children}) => (
                 <AppWindow
-                    title={app.title}
-                    id={app.id}
-                    initialX={app.initialX}
-                    initialY={app.initialY}
-                    key={app.id}
+                    title={title}
+                    id={id}
+                    initialX={initialX}
+                    initialY={initialY}
+                    key={id}
                 >
-                    {app.content}
+                    {children}
                 </AppWindow>
             ))}
         </article>
